@@ -13,8 +13,8 @@ if (!isset($_SESSION["autoriser"]))
 
 if(isset($_POST['Submit']))
 { 
-	$filepath = "images/" . $_FILES["image"]["name"];
-	$image = $_FILES['image']['name'];
+	$filepath = "images/" . time() . $_FILES["image"]["name"];
+	$image = time().$_FILES['image']['name'];
 	move_uploaded_file($_FILES["image"]["tmp_name"], $filepath);
 
 	
