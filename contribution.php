@@ -25,11 +25,37 @@ if(isset($_POST['Submit']))
 	$nbrcopie = mysqli_real_escape_string($mysqli, $_POST['nbrcopie']);
 
 	$mysqli->query("INSERT INTO contribution(id_user,nom,location,description,image,prix,nbr_copie) VALUES('$iduser','$name','$location','$description','$image','$price','$nbrcopie')");
+
 	header('Location:contribution.php');
 }
 
-if(isset($_POST['modifier'])){
+if(isset($_POST['modifier']))
+{
+	$id = mysqli_real_escape_string($mysqli, $_POST['idd']);
 
+	$filepath = "images/" . time() . $_FILES["upd-imgs"]["name"];
+	$upd_image = time().$_FILES['upd-imgs']['name'];
+	move_uploaded_file($_FILES["upd-imgs"]["tmp_name"], $filepath);
+
+	
+	$upd_name = mysqli_real_escape_string($mysqli, $_POST['upd-name']);
+	$upd_location = mysqli_real_escape_string($mysqli, $_POST['upd-location']);
+	$upd_description = mysqli_real_escape_string($mysqli, $_POST['upd-description']);
+	$upd_price = mysqli_real_escape_string($mysqli, $_POST['upd-price']);
+	$upd_nbrcopie = mysqli_real_escape_string($mysqli, $_POST['upd-nbrcopie']);
+
+	$mysqli->query("UPDATE contribution SET nom='$upd_name',location='$upd_location',image='$upd_image',prix='$upd_price',nbr_copie='$upd_nbrcopie' WHERE id=$id");
+
+	header('Location:contribution.php');
+}
+if(isset($_POST['delete']))
+{	
+
+	$id = mysqli_real_escape_string($mysqli, $_POST['idd']);
+
+	$result = mysqli_query($mysqli, "DELETE FROM contribution WHERE id=$id");
+
+	header('Location:contribution.php');
 }
 ?>
 <!DOCTYPE html>
@@ -88,17 +114,19 @@ if(isset($_POST['modifier'])){
 				    			<p><?php echo $res['prix']." $"; ?></p>
 				    			<p><?php echo $res['nbr_copie']." copies"; ?></p>
 				    		</div>
+				    		<input type="hidden" name="idd" value=<?php echo $res['id']; ?>>
 				    		<input id="upt-icon" type="submit" name="update" value="" onclick="uptForm('<?php echo $count; ?>')"></td>
 							<input id="dlt-icon" type="submit" name="delete" value="" onClick="return confirm('Are you sure you want to delete?')">
 			    		</div>
 			    		
 			    		<form style="display: none;" id="frm-<?php echo $count; ?>" class="image-form" action="contribution.php" enctype="multipart/form-data" method="post">
-			    			<input class="" type="text" name="name" value=<?php echo $res['nom']; ?>><br/>
-				    		<input class="" type="text" name="location" value=<?php echo $res['location']; ?>><br/>
-				    		<textarea class="" rows="4" name="description"><?php echo $res['description']; ?></textarea><br/>
-				    		<input type="file" name="imgs"><br/>
-				    		<input class="" type="number" name="price" value=<?php echo $res['prix']; ?>><br/>
-				    		<input class="" type="number" name="nbrcopie" value=<?php echo $res['nbr_copie']; ?>><br/>
+			    			<input class="" type="text" name="upd-name" value=<?php echo $res['nom']; ?>><br/>
+				    		<input class="" type="text" name="upd-location" value=<?php echo $res['location']; ?>><br/>
+				    		<textarea class="" rows="4" name="upd-description"><?php echo $res['description']; ?></textarea><br/>
+				    		<input type="file" name="upd-imgs"><br/>
+				    		<input class="" type="number" name="upd-price" value=<?php echo $res['prix']; ?>><br/>
+				    		<input class="" type="number" name="upd-nbrcopie" value=<?php echo $res['nbr_copie']; ?>><br/>
+				    		<input type="hidden" name="idd" value=<?php echo $res['id']; ?>>
 							<input class="sub-impt" type="submit" value="" name="modifier"> <br/>
 			    		</form>
 			    	</div>

@@ -2,7 +2,7 @@
 include_once("database.php"); 
 
 $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id ASC");
-$counter = mysqli_query($mysqli, "SELECT count(id_user) as nbr_cont FROM contribution c inner join users u on c.id_user= u.id group by c.id_user");
+$counter = mysqli_query($mysqli, "SELECT id_user,count(id_user) as nbr_cont FROM contribution c inner join users u on c.id_user= u.id group by c.id_user");
 
 session_start();
 
@@ -68,17 +68,18 @@ if(isset($_POST['Submit']))
 			    			<img class=img-stl src="images/<?php echo $res['image'] ?>">
 					    	<p><b><?php echo $res['nom'] ?></b></p>
 					    	<p><?php echo $res['email'] ?></p>
-					    	<?php while($cont = mysqli_fetch_assoc($counter)) { 
-					    		if($cont['nbr_cont'] == 0){ ?>
-					    			<p style='color: #7f7c7c;'>0 contributions</p>
-					    	<?php }else{ ?>
-					    		
-
-					    	<p style='color: #7f7c7c;'><?php echo $cont['nbr_cont'] ?> contributions</p>
-
 					    	<?php 
-					    	} 
+					    	while($cont = mysqli_fetch_assoc($counter)) { 
+					    		if($cont['id_user'] == $res['id']){ 
+					    	?>
+					    			<p style='color: #7f7c7c;'><?php echo $cont['nbr_cont'] ?> contributions</p>
+					    	<?php 
+					    		break;}else{ 
+					    	?>
+					    			<p style='color: #7f7c7c;'>0 contributions</p>
+					    	<?php 
 					    	break;
+					    	} 
 					    	} 
 					    	?> 
 					    </div>
