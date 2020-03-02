@@ -123,12 +123,14 @@ if(isset($_POST['delete']))
 			    		</form>
 			    		
 			    		<form style="display: none;" id="frm-<?php echo $count; ?>" class="image-form" action="contribution.php" enctype="multipart/form-data" method="post">
-			    			<input class="" type="text" name="upd-name" value=<?php echo $res['nom']; ?>><br/>
-				    		<input class="" type="text" name="upd-location" value=<?php echo $res['location']; ?>><br/>
-				    		<textarea class="" rows="4" name="upd-description"><?php echo $res['description']; ?></textarea><br/>
-				    		<input type="file" name="upd-imgs" value=<?php echo $res['image']; ?>><br/>
-				    		<input class="" type="number" name="upd-price" value=<?php echo $res['prix']; ?>><br/>
-				    		<input class="" type="number" name="upd-nbrcopie" value=<?php echo $res['nbr_copie']; ?>><br/>
+			    			<input style="margin-top: 14px;" class="frst-from" type="text" name="upd-name" value=<?php echo $res['nom']; ?>><br/>
+				    		<input class="frst-from" type="text" name="upd-location" value=<?php echo $res['location']; ?>><br/>
+				    		<textarea class="frst-from" rows="6" name="upd-description"><?php echo $res['description']; ?></textarea><br/>
+				    		<input style="margin-left: 1rem;" type="file" name="upd-imgs" value=<?php echo $res['image']; ?>><br/>
+				    		<div style="display: flex;flex-direction: row;justify-content: space-around;">
+					    		<input style="width: 150px;" class="frst-from" type="number" name="upd-price" value=<?php echo $res['prix']; ?>><br/>
+					    		<input style="width: 150px;" class="frst-from" type="number" name="upd-nbrcopie" value=<?php echo $res['nbr_copie']; ?>><br/>
+				    		</div>
 				    		<input type="hidden" name="idd" value=<?php echo $res['id']; ?>>
 							<input class="sub-impt" type="submit" value="" name="modifier"> <br/>
 			    		</form>
