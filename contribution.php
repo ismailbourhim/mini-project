@@ -44,7 +44,7 @@ if(isset($_POST['modifier']))
 	$upd_price = mysqli_real_escape_string($mysqli, $_POST['upd-price']);
 	$upd_nbrcopie = mysqli_real_escape_string($mysqli, $_POST['upd-nbrcopie']);
 
-	$mysqli->query("UPDATE contribution SET nom='$upd_name',location='$upd_location',image='$upd_image',prix='$upd_price',nbr_copie='$upd_nbrcopie' WHERE id=$id");
+	$mysqli->query("UPDATE contribution SET nom='$upd_name',location='$upd_location',description='$upd_description',image='$upd_image',prix='$upd_price',nbr_copie='$upd_nbrcopie' WHERE id=$id");
 
 	header('Location:contribution.php');
 }
@@ -88,12 +88,14 @@ if(isset($_POST['delete']))
 			    <div id="sp-empty" class="col-sm-4">
 			    	<a id="btn-add" href="#" class="add-img">
 			    	<form style="visibility: hidden;" id="show" class="form-cont" action="contribution.php" enctype="multipart/form-data" method="post">
-			    		<input class="" type="text" name="name" required><br/>
-			    		<input class="" type="text" name="location" required><br/>
-			    		<textarea class="" name="description" required></textarea><br/>
-			    		<input type="file" name="image" required><br/>
-			    		<input class="" type="text" name="price" required><br/>
-			    		<input class="" type="text" name="nbrcopie" required><br/>
+			    		<input class="frst-from" type="text" name="name" placeholder="name here" required><br/>
+			    		<input class="frst-from" type="text" name="location" placeholder="location" required><br/>
+			    		<textarea class="frst-from" name="description" rows="6" placeholder="description here" required></textarea><br/>
+			    		<input style="margin-left: 1rem;" type="file" name="image" required><br/>
+			    		<div style="display: flex;flex-direction: row;justify-content: space-around;">
+				    			<input style="width: unset;" class="frst-from" type="text" name="price" placeholder="price" required><br/>
+			    				<input style="width: unset;" class="frst-from" type="text" name="nbrcopie" placeholder="number of copies" required><br/>
+				    	</div>
 						<input class="sub-impt" type="submit" value="" name="Submit"> <br/>
 			    	</form>
 			    	</a>
@@ -104,26 +106,27 @@ if(isset($_POST['delete']))
 
 			    <div id='sp-empty' class='col-sm-4'>
 			    	<div class='info' style="background-image: url(images/<?php echo $res['image']; ?>);background-position: center;background-repeat: no-repeat;background-size: cover;">
-
-			    		<div class="info-block" id="information-<?php echo $count; ?>">
-				    		<p><?php echo $res['nom']; ?></p>
-				    		<p><?php echo $res['location']; ?></p>
-				    		<p style="height: 132px;"><?php echo $res['description']; ?></p>
-				    		<p><?php echo $res['image']; ?></p>
-				    		<div style="display: flex;flex-direction: row;justify-content: space-around;">
-				    			<p><?php echo $res['prix']." $"; ?></p>
-				    			<p><?php echo $res['nbr_copie']." copies"; ?></p>
+			    		<form action="contribution.php" enctype="multipart/form-data" method="post">
+				    		<div class="info-block" id="information-<?php echo $count; ?>">
+					    		<p><?php echo $res['nom']; ?></p>
+					    		<p><?php echo $res['location']; ?></p>
+					    		<p style="height: 132px;"><?php echo $res['description']; ?></p>
+					    		<p><?php echo $res['image']; ?></p>
+					    		<div style="display: flex;flex-direction: row;justify-content: space-around;">
+					    			<p><?php echo $res['prix']." $"; ?></p>
+					    			<p><?php echo $res['nbr_copie']." copies"; ?></p>
+					    		</div>
+					    		<input type="hidden" name="idd" value=<?php echo $res['id']; ?>>
+					    		<input id="upt-icon" name="update" value="" onclick="uptForm('<?php echo $count; ?>')"></td>
+								<input id="dlt-icon" type="submit" name="delete" value="" onClick="return confirm('Are you sure you want to delete?')">
 				    		</div>
-				    		<input type="hidden" name="idd" value=<?php echo $res['id']; ?>>
-				    		<input id="upt-icon" type="submit" name="update" value="" onclick="uptForm('<?php echo $count; ?>')"></td>
-							<input id="dlt-icon" type="submit" name="delete" value="" onClick="return confirm('Are you sure you want to delete?')">
-			    		</div>
+			    		</form>
 			    		
 			    		<form style="display: none;" id="frm-<?php echo $count; ?>" class="image-form" action="contribution.php" enctype="multipart/form-data" method="post">
 			    			<input class="" type="text" name="upd-name" value=<?php echo $res['nom']; ?>><br/>
 				    		<input class="" type="text" name="upd-location" value=<?php echo $res['location']; ?>><br/>
 				    		<textarea class="" rows="4" name="upd-description"><?php echo $res['description']; ?></textarea><br/>
-				    		<input type="file" name="upd-imgs"><br/>
+				    		<input type="file" name="upd-imgs" value=<?php echo $res['image']; ?>><br/>
 				    		<input class="" type="number" name="upd-price" value=<?php echo $res['prix']; ?>><br/>
 				    		<input class="" type="number" name="upd-nbrcopie" value=<?php echo $res['nbr_copie']; ?>><br/>
 				    		<input type="hidden" name="idd" value=<?php echo $res['id']; ?>>

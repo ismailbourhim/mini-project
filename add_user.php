@@ -3,6 +3,7 @@ include_once("database.php");
 
 $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id ASC");
 $counter = mysqli_query($mysqli, "SELECT id_user,count(id_user) as nbr_cont FROM contribution c inner join users u on c.id_user= u.id group by c.id_user");
+$nbrusers = mysqli_query($mysqli, "SELECT count(id) as nbr FROM users");
 
 session_start();
 
@@ -24,6 +25,8 @@ if(isset($_POST['Submit']))
 	$mysqli->query("INSERT INTO users(image,nom,email,password) VALUES('$image','$nom','$email','$pass')");
 	header("Location: add_user.php");
 }
+$usr = mysqli_fetch_assoc($nbrusers);
+$u = $usr['nbr'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,9 +53,9 @@ if(isset($_POST['Submit']))
 			<div class="wid-div">
 			  <div class="row">
 			    <div id="sp-empty" class="col-sm-4">
-			    	<div class="cadre" style="background-color: #ddd;">
+			    	<div class="cadre">
 			    	<form class="form-user" action="add_user.php" enctype="multipart/form-data" method="post">
-			    		<input type="file" name="imgs" required><br/>
+			    		<input id="file-upt" type="file" name="imgs" required><br/>
 			    		<input class="stl-imput" type="text" name="nom" required><br/>
 			    		<input class="stl-imput" type="email" name="email" required><br/>
 			    		<input class="stl-imput" type="password" name="pass" required><br/>
@@ -69,18 +72,20 @@ if(isset($_POST['Submit']))
 					    	<p><b><?php echo $res['nom'] ?></b></p>
 					    	<p><?php echo $res['email'] ?></p>
 					    	<?php 
-					    	while($cont = mysqli_fetch_assoc($counter)) { 
-					    		if($cont['id_user'] == $res['id']){ 
-					    	?>
-					    			<p style='color: #7f7c7c;'><?php echo $cont['nbr_cont'] ?> contributions</p>
-					    	<?php 
-					    		break;}else{ 
-					    	?>
-					    			<p style='color: #7f7c7c;'>0 contributions</p>
-					    	<?php 
-					    	break;
-					    	} 
-					    	} 
+					    	for ($i=1; $i <= $u ; $i++) { 
+						    	while($cont = mysqli_fetch_assoc($counter)) { 
+						    		if($cont['id_user'] == $res['id']){ 
+						    	?>
+						    			<p style='color: #7f7c7c;'><?php echo $cont['nbr_cont'] ?> contributions</p>
+						    	<?php 
+						    	}else{ 
+						    	?>
+						    			<p style='color: #7f7c7c;'>0 contributions</p>
+						    	<?php 
+						    	}
+						    	break; 
+						    	} 
+					    	}
 					    	?> 
 					    </div>
 			    	</div>

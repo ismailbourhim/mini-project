@@ -188,14 +188,13 @@ body {
     font-size: 19px;
 }
 .form-cont{
-	text-align: center;
   background: #ddd;
   width: 100%;
-  padding: 38px 0;
+  padding: 3px 0;
 }
 .form-user{
   text-align: center;
-  background: #ddd;
+  background: #fff;
   width: 100%;
 }
 .add-img{
@@ -260,4 +259,24 @@ input#dlt-icon {
     width: 37px;
     height: 37px;
     border: 0;
+}
+.frst-from{
+    background: #b5b5b596;
+    border: none;
+    color: #fff;
+    margin-bottom: 4px;
+    width: 90%;
+    margin-left: 1rem;
+}
+.frst-from:focus {
+    background-color: #66bb6a;
+}
+input#file-upt {
+    background-image: url(../images/add_image.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    font-size: 0px;
 }
