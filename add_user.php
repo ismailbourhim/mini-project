@@ -28,7 +28,7 @@ if(isset($_POST['Submit']))
 <!DOCTYPE html>
 <html>
 <head>
-	<title>add user</title>
+	<title>Dashbord</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/wrap.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -52,7 +52,11 @@ if(isset($_POST['Submit']))
 			    <div id="sp-empty" class="col-sm-4">
 			    	<div class="cadre">
 			    	<form class="form-user" action="add_user.php" enctype="multipart/form-data" method="post">
-			    		<input id="file-upt" type="file" name="imgs" required><br/>
+			    		<!-- <input id="file-upt" type="file" name="imgs" required><br/> -->
+			    		<input type="file" name="imgs" id="inpFile" onchange="file(this)" required><br/>
+			    		<div class="image-preview" id="imgpreview">
+			    			<img id="previmage" src="images/add-icon.png" class="cl-img">
+			    		</div>
 			    		<input class="stl-imput" type="text" name="nom" required><br/>
 			    		<input class="stl-imput" type="email" name="email" required><br/>
 			    		<input class="stl-imput" type="password" name="pass" required><br/>
@@ -91,5 +95,8 @@ if(isset($_POST['Submit']))
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>
+
+<script src="js/script.js"></script>
