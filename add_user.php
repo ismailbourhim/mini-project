@@ -53,9 +53,9 @@ if(isset($_POST['Submit']))
 			    	<div class="cadre">
 			    	<form class="form-user" action="add_user.php" enctype="multipart/form-data" method="post">
 			    		<!-- <input id="file-upt" type="file" name="imgs" required><br/> -->
-			    		<input type="file" name="imgs" id="inpFile" onchange="file(this)" required><br/>
+			    		<input style="display: none;" id="fileUpload" type="file" name="imgs" id="inpFile" onchange="file(this)" required><br/>
 			    		<div class="image-preview" id="imgpreview">
-			    			<img id="previmage" src="images/add-icon.png" class="cl-img">
+			    			<img id="previmage" src="images/add-icon.png" class="cl-img" onclick="triggerClick()">
 			    		</div>
 			    		<input class="stl-imput" type="text" name="nom" required><br/>
 			    		<input class="stl-imput" type="email" name="email" required><br/>

@@ -287,14 +287,14 @@ img.cl-img {
     width: 100px !important;
     height: 100px !important;
 }
-#inpFile{
+/*#inpFile{
     width: 100px;
     height: 100px;
     position: absolute;
     top: 12%;
     right: 38%;
     font-size: 0px;
-}
+}*/
 .login-form input:focus {
     border: 2px solid #4caf50;
 }

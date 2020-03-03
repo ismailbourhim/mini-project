@@ -20,3 +20,6 @@ function file(input) {
 	}
 }
 
+function triggerClick(){
+	document.querySelector('#fileUpload').click();
+}
