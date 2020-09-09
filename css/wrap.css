@@ -1,6 +1,8 @@
 /*login style*/
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
+::-webkit-input-placeholder{
+	text-decoration: none;
+}
 .login-page {
   width: 360px;
   padding: 8% 0 0;
@@ -206,8 +208,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-	background-image: url(../images/add_image.png);
+  background-image: url(../images/add_image.png);
   background-position: center;
+  text-decoration: none !important;
 }
 .sub-impt{
 	background-image: url(../images/sub.png);

@@ -96,7 +96,7 @@ if(isset($_POST['delete']))
 			    		<input class="frst-from" type="text" name="location" placeholder="location" required><br/>
 			    		<textarea class="frst-from" name="description" rows="6" placeholder="description here" required></textarea><br/>
 			    		<input style="margin-left: 1rem;" type="file" name="image" required><br/>
-			    		<div style="display: flex;flex-direction: row;justify-content: space-around;">
+			    		<div style="display: flex;flex-direction: row;justify-content: space-around;margin-top: 5px;margin-right: 16px;">
 				    			<input style="width: unset;" class="frst-from" type="text" name="price" placeholder="price" required><br/>
 			    				<input style="width: unset;" class="frst-from" type="text" name="nbrcopie" placeholder="number of copies" required><br/>
 				    	</div>
@@ -116,7 +116,7 @@ if(isset($_POST['delete']))
 					    		<p><?php echo $res['location']; ?></p>
 					    		<p style="height: 132px;"><?php echo $res['description']; ?></p>
 					    		<p><?php echo $res['image']; ?></p>
-					    		<div style="display: flex;flex-direction: row;justify-content: space-around;">
+					    		<div style="display: flex;flex-direction: row;justify-content: space-around;margin-top: 5px;">
 					    			<p><?php echo $res['prix']." $"; ?></p>
 					    			<p><?php echo $res['nbr_copie']." copies"; ?></p>
 					    		</div>
